@@ -1,57 +1,56 @@
+// @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from 'vitest'
-import { JSDOM } from 'jsdom'
+import { findElement } from '../src/dom/selector'
 
-// note: we test selector logic with jsdom
-// not ideal but good enough for unit tests
+// these tests exercise the library's own findElement(), not jsdom's querySelector
 
-describe('selector strategies', () => {
-  let dom: JSDOM
-
+describe('findElement strategies', () => {
   beforeEach(() => {
-    dom = new JSDOM(`
-      <html>
-        <body>
-          <nav>
-            <a href="/home" id="nav-home">Home</a>
-            <a href="/about">About Us</a>
-          </nav>
-          <main>
-            <h1>Welcome</h1>
-            <form>
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" />
-              <button type="submit" aria-label="Send message">Submit</button>
-            </form>
-          </main>
-        </body>
-      </html>
-    `)
+    document.body.innerHTML = `
+      <nav>
+        <a href="/home" id="nav-home">Home</a>
+        <a href="/about">About Us</a>
+      </nav>
+      <main>
+        <h1>Welcome</h1>
+        <form>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" />
+          <button type="submit" aria-label="Send message">Submit</button>
+        </form>
+      </main>`
   })
 
-  it('should find element by id', () => {
-    const doc = dom.window.document
-    const el = doc.querySelector('#nav-home')
-    expect(el).not.toBeNull()
-    expect(el?.textContent).toBe('Home')
+  it('resolves a direct CSS selector with full confidence', () => {
+    const r = findElement('#nav-home')
+    expect(r).not.toBeNull()
+    expect(r!.strategy).toBe('css')
+    expect(r!.confidence).toBe(1)
+    expect(r!.element.textContent).toBe('Home')
   })
 
-  it('should find interactive elements', () => {
-    const doc = dom.window.document
-    const inputs = doc.querySelectorAll('input, button, a')
-    expect(inputs.length).toBe(4) // 2 links + 1 input + 1 button
+  it('resolves by aria-label when the description is not valid CSS', () => {
+    const r = findElement('Send message')
+    expect(r).not.toBeNull()
+    expect(r!.strategy).toBe('aria')
+    expect(r!.element.tagName).toBe('BUTTON')
   })
 
-  it('should find element by aria-label', () => {
-    const doc = dom.window.document
-    const btn = doc.querySelector('[aria-label="Send message"]')
-    expect(btn).not.toBeNull()
-    expect(btn?.tagName).toBe('BUTTON')
+  it('resolves by the name attribute', () => {
+    const r = findElement('email')
+    expect(r).not.toBeNull()
+    expect(['aria', 'css']).toContain(r!.strategy)
+    expect(r!.element.tagName).toBe('INPUT')
   })
 
-  it('should find input by placeholder', () => {
-    const doc = dom.window.document
-    const input = doc.querySelector('[placeholder="you@example.com"]') as HTMLInputElement
-    expect(input).not.toBeNull()
-    expect(input.type).toBe('email')
+  it('falls back to text matching for visible link text', () => {
+    const r = findElement('About Us')
+    expect(r).not.toBeNull()
+    expect(r!.confidence).toBeGreaterThan(0.5)
+  })
+
+  it('returns null when nothing matches with enough confidence', () => {
+    const r = findElement('a totally unrelated nonexistent phrase xyzzy')
+    expect(r).toBeNull()
   })
 })
