@@ -84,12 +84,15 @@ Each result includes a confidence score. The agent uses the highest-confidence m
 
 This is actively being developed. Core DOM analysis and action execution work well. The planner is functional but basic — it doesn't re-plan on failure yet (it just stops). The smart selector handles most cases but struggles with highly dynamic SPAs.
 
+The end-to-end loop is covered by an integration test (`tests/agent.integration.test.ts`) that runs the **real** library — serialize → plan → type → click → submit — against a live DOM with a mock LLM. Run it with `npm test`.
+
 What's working:
 - [x] DOM snapshot and serialization
 - [x] Accessibility tree extraction
 - [x] Action registry and execution
 - [x] LLM-based planning
 - [x] Mutation tracking
+- [x] End-to-end form fill (verified in CI against a real DOM)
 
 What's next:
 - [ ] Re-planning on action failure
