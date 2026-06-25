@@ -51,6 +51,19 @@ The agent will:
 3. Ask the LLM to plan a sequence of actions
 4. Execute each action, monitoring DOM changes between steps
 
+## Demo
+
+See the whole loop in your terminal — DOM compression, planning, and a form filling itself:
+
+```bash
+npm install
+npm run demo                          # uses a mock LLM, no API key needed
+ANTHROPIC_API_KEY=sk-... npm run demo # let a real Claude model do the planning
+```
+
+It loads a heavy (~40KB) page, compresses it to a ~1KB accessibility view (~98% smaller),
+plans from that view, and fills + submits a business-signup form step by step.
+
 ## Custom actions
 
 The built-in actions (click, type, navigate) cover basics. Register your own:
