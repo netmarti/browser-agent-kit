@@ -4,6 +4,10 @@ Build AI agents that run **inside** the browser — same page, same DOM, real co
 
 > Most agent frameworks control a browser from the outside (Puppeteer, Playwright). This toolkit lets you build agents that operate from within. Different tradeoffs, different use cases.
 
+![demo](examples/demo.gif)
+
+*A 40KB page compressed to ~1KB of accessibility context, then a form filled and submitted from one sentence. Run it yourself: `npm run demo`.*
+
 ## How it works
 
 ```
