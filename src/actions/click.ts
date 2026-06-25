@@ -17,11 +17,13 @@ export const clickAction: Action = {
 
     const el = result.element as HTMLElement
 
-    // scroll into view if needed
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-
-    // wait a bit for scroll
-    await new Promise(r => setTimeout(r, 200))
+    // scroll into view if needed (guarded: not all environments implement it,
+    // e.g. some embedded webviews and test runners)
+    if (typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // wait a bit for scroll
+      await new Promise(r => setTimeout(r, 200))
+    }
 
     // simulate click
     el.click()
