@@ -82,7 +82,7 @@ function findInteractiveElements(root: Element): InteractiveElement[] {
   const selectors = 'a, button, input, select, textarea, [role="button"], [tabindex]'
   const elements = root.querySelectorAll(selectors)
 
-  return Array.from(elements).map(el => {
+  return Array.from(elements).filter(el => !(el instanceof HTMLInputElement && el.type === 'hidden')).map(el => {
     const elem: InteractiveElement = {
       tag: el.tagName.toLowerCase(),
       path: generateSelector(el),

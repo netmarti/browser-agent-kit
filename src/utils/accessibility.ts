@@ -27,6 +27,10 @@ function processElement(element: Element, depth = 0): A11yNode[] {
     if (child instanceof HTMLElement && (child.hidden || child.getAttribute('aria-hidden') === 'true')) {
       continue
     }
+    // skip hidden inputs — they carry no UI and leak noise (tokens, routing) into context
+    if (child instanceof HTMLInputElement && child.type === 'hidden') {
+      continue
+    }
 
     const role = getRole(child)
     const name = getAccessibleName(child)
