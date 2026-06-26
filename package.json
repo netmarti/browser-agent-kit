@@ -10,7 +10,8 @@
     "test": "vitest run",
     "dev": "tsc --watch",
     "demo": "tsx examples/demo.ts",
-    "demo:cl": "tsx examples/demo-cl.ts"
+    "demo:cl": "tsx examples/demo-cl.ts",
+    "record:cl": "node examples/record-visual.mjs"
   },
   "keywords": [
     "ai",
@@ -23,7 +24,9 @@
   "author": "Nico Silva",
   "license": "MIT",
   "devDependencies": {
+    "esbuild": "^0.28.1",
     "jsdom": "^24.1.0",
+    "playwright-core": "^1.61.1",
     "tsx": "^4.22.4",
     "typescript": "^5.6.2",
     "vitest": "^2.0.5"
