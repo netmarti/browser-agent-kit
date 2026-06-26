@@ -119,8 +119,8 @@ async function claudeLLM(prompt: string): Promise<string> {
   return data.content[0].text
 }
 const mockLLM = async () => JSON.stringify([
-  { action: 'type', params: { target: '#company', text: 'Judini AI' }, reasoning: 'company name' },
-  { action: 'type', params: { target: '#email', text: 'nico@judini.ai' }, reasoning: 'work email' },
+  { action: 'type', params: { target: '#company', text: 'Acme Studio' }, reasoning: 'company name' },
+  { action: 'type', params: { target: '#email', text: 'founder@acme.studio' }, reasoning: 'work email' },
   { action: 'type', params: { target: '#employees', text: '11-50' }, reasoning: 'team size' },
   { action: 'type', params: { target: '#notes', text: 'Migrating from a competitor — need API access.' }, reasoning: 'notes' },
   { action: 'click', params: { target: 'Create account' }, reasoning: 'submit' },
@@ -155,7 +155,7 @@ async function main() {
   // scene 3: plan
   await scene('3 · The model plans from that compact view')
   console.log(`  brain: ${useReal ? C.green(brain) : C.yellow(brain)}`)
-  const goal = 'Open a business account for Judini AI (work email nico@judini.ai, team 11-50), add a short note, then submit.'
+  const goal = 'Open a business account for Acme Studio (work email founder@acme.studio, team 11-50), add a short note, then submit.'
   console.log(C.dim(`  goal:  ${goal}`))
   console.log(C.dim('\n  thinking...'))
   const registry = new ActionRegistry()
