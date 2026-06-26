@@ -188,7 +188,7 @@ async function main() {
   console.log(`  Filled a 4-field form from one sentence, against a ${C.bold(kb(rawDOM))} page,`)
   console.log(`  on ${C.bold(C.green(kb(context)))} of context. No Puppeteer. Runs ${C.bold('inside')} the browser.`)
   line()
-  console.log(C.dim('  npm i browser-agent-kit  ·  MIT  ·  by Nico Silva\n'))
+  console.log(C.dim('  github.com/nicolascine/browser-agent-kit  ·  MIT  ·  by Nicolás Silva\n'))
 }
 
 main()

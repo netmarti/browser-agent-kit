@@ -30,9 +30,21 @@ The key insight: LLMs don't need the full DOM. They need a **semantic** view —
 
 ## Install
 
+Not on npm yet. Install straight from GitHub:
+
 ```bash
-npm install browser-agent-kit
+npm install github:nicolascine/browser-agent-kit
 ```
+
+Or clone it to run the demos and read the source:
+
+```bash
+git clone https://github.com/nicolascine/browser-agent-kit
+cd browser-agent-kit && npm install
+npm run demo:cl
+```
+
+It's TypeScript + ESM, meant to be bundled into a browser app (esbuild/vite/webpack).
 
 ## Usage
 

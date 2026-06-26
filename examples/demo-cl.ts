@@ -146,7 +146,7 @@ async function main() {
   console.log(`  leyendo ${C.bold(C.green(kb(context)))} de contexto en vez de ${C.bold(kb(rawDOM))} de DOM.`)
   console.log(C.dim('  Sin Puppeteer. Sin driver externo. Corre adentro, en la sesión real.'))
   line()
-  console.log(C.dim('  npm i browser-agent-kit  ·  MIT  ·  side project open source\n'))
+  console.log(C.dim('  github.com/nicolascine/browser-agent-kit  ·  MIT  ·  side project open source\n'))
 }
 
 main()
