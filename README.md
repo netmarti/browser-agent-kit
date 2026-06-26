@@ -4,9 +4,9 @@ Build AI agents that run **inside** the browser — same page, same DOM, real co
 
 > Most agent frameworks control a browser from the outside (Puppeteer, Playwright). This toolkit lets you build agents that operate from within. Different tradeoffs, different use cases.
 
-![demo](examples/demo.gif)
+![demo](examples/demo-cl.gif)
 
-*A 40KB page compressed to ~1KB of accessibility context, then a form filled and submitted from one sentence. Run it yourself: `npm run demo`.*
+*Running against the real rendered DOM of [mercadopublico.cl](https://www.mercadopublico.cl) (Chile's public-procurement portal, a SPA). A `curl` returns an empty 166-byte shell; the agent runs **after** render, reads the page as a ~4KB accessibility tree (93% smaller than the DOM), and drives the real search box. Run it: `npm run demo:cl`.*
 
 ## How it works
 
@@ -61,12 +61,16 @@ See the whole loop in your terminal — DOM compression, planning, and a form fi
 
 ```bash
 npm install
-npm run demo                          # uses a mock LLM, no API key needed
-ANTHROPIC_API_KEY=sk-... npm run demo # let a real Claude model do the planning
+npm run demo:cl    # real DOM of mercadopublico.cl (Chile) — agent drives the search box
+npm run demo       # a synthetic signup page — full fill + submit loop
+
+ANTHROPIC_API_KEY=sk-... npm run demo:cl   # let a real Claude model do the planning
 ```
 
-It loads a heavy (~40KB) page, compresses it to a ~1KB accessibility view (~98% smaller),
-plans from that view, and fills + submits a business-signup form step by step.
+`demo:cl` runs against a captured snapshot of the *rendered* DOM of a real Chilean
+government site (it's a SPA — scrapers see an empty shell). `demo` uses a heavier
+synthetic page to show the full type → click → submit loop. Both compress the page to
+a ~1–4KB accessibility view (90%+ smaller), plan from it, and act step by step.
 
 ## Custom actions
 
