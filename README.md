@@ -4,9 +4,9 @@ Build AI agents that run **inside** the browser — same page, same DOM, real co
 
 > Most agent frameworks control a browser from the outside (Puppeteer, Playwright). This toolkit lets you build agents that operate from within. Different tradeoffs, different use cases.
 
-![demo](examples/demo-cl-visual.gif)
+![demo](examples/demo-cl-pro.gif)
 
-*browser-agent-kit injected into [mercadopublico.cl](https://www.mercadopublico.cl) (Chile's public-procurement portal, a SPA). A `curl` returns an empty 166-byte shell; the agent runs **after** render, reads the page as a ~4KB accessibility tree (≈90% smaller than the DOM), finds the real search box and types into it. No Puppeteer, no external driver — it lives inside the page.*
+*Left: the agent's view — the rendered DOM (hundreds of nodes) collapsing into the accessibility tree it actually reads. Right: the real [mercadopublico.cl](https://www.mercadopublico.cl) (Chile's public-procurement portal, a SPA) with the kit injected into it. A `curl` returns an empty 166-byte shell; the agent runs **after** render, reads the page as a ~4KB tree (≈90% smaller than the DOM), and types into the real search box — no Puppeteer, no external driver. Reproduce it: `npm run record:pro`.*
 
 ## How it works
 
