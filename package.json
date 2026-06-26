@@ -9,7 +9,8 @@
     "build": "tsc",
     "test": "vitest run",
     "dev": "tsc --watch",
-    "demo": "tsx examples/demo.ts"
+    "demo": "tsx examples/demo.ts",
+    "demo:cl": "tsx examples/demo-cl.ts"
   },
   "keywords": [
     "ai",
