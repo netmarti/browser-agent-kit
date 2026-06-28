@@ -1,14 +1,27 @@
 {
   "name": "browser-agent-kit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Toolkit for building AI agents that operate in the browser",
   "type": "module",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=neutral --outfile=dist/index.js && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "prepare": "npm run build",
     "test": "vitest run",
-    "dev": "tsc --watch",
+    "dev": "esbuild src/index.ts --bundle --format=esm --platform=neutral --outfile=dist/index.js --watch",
     "demo": "tsx examples/demo.ts",
     "demo:cl": "tsx examples/demo-cl.ts",
     "record:pro": "node examples/record-pro.mjs"
@@ -21,7 +34,7 @@
     "automation",
     "llm"
   ],
-  "author": "Nico Silva",
+  "author": "Nicolás Silva",
   "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.28.1",
