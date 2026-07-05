@@ -133,13 +133,33 @@ What's next:
 - [ ] iframe handling
 - [ ] Session recording/replay
 
-## Why not Puppeteer?
+# Why not Puppeteer?
 
 Puppeteer/Playwright control a browser from outside. browser-agent-kit runs inside. Use this when:
 - Building a browser extension with AI
 - Adding an AI assistant to your web app
 - Running agents in existing browser sessions
 - Need same-origin access without proxying
+
+
+# Testing & Quality Assurance
+
+Ensuring the reliability of our browser agents through rigorous automated testing.
+
+### Running the Test Suite
+To validate functionality and catch regressions early, run the tests locally:
+
+'bash
+# Install dependencies (if not already done)
+npm install
+
+# Run the full test suite
+npm test
+
+# View coverage report (optional, requires configuration)
+npm run test:coverage
+
+
 
 ## License
 
