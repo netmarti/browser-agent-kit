@@ -17,7 +17,7 @@
     "src"
   ],
   "sideEffects": false,
-    "scripts": {
+  "scripts": {
     "build": "esbuild src/index.ts --bundle --format=esm --platform=neutral --outfile=dist/index.js && tsc --emitDeclarationOnly --declaration --outDir dist",
     "prepare": "npm run build",
     "test": "vitest run --coverage",
