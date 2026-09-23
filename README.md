@@ -141,7 +141,6 @@ Puppeteer/Playwright control a browser from outside. browser-agent-kit runs insi
 - Running agents in existing browser sessions
 - Need same-origin access without proxying
 
-
 # Testing & Quality Assurance
 
 Ensuring the reliability of our browser agents through rigorous automated testing.
@@ -149,17 +148,21 @@ Ensuring the reliability of our browser agents through rigorous automated testin
 ### Running the Test Suite
 To validate functionality and catch regressions early, run the tests locally:
 
-'bash
+```bash
 # Install dependencies (if not already done)
 npm install
 
-# Run the full test suite
+# Run the full test suite with coverage
 npm test
 
-# View coverage report (optional, requires configuration)
+# Run tests in watch mode (for development)
+npm run test:watch
+
+# Generate JSON coverage report
 npm run test:coverage
+```
 
-
+> **Improvement Note:** Test suite enhanced with unit tests for selector strategies (CSS, ARIA, text) and coverage reporting by [Daniel (netmarti)](https://github.com/netmarti).
 
 ## License
 
