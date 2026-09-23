@@ -17,10 +17,12 @@
     "src"
   ],
   "sideEffects": false,
-  "scripts": {
+    "scripts": {
     "build": "esbuild src/index.ts --bundle --format=esm --platform=neutral --outfile=dist/index.js && tsc --emitDeclarationOnly --declaration --outDir dist",
     "prepare": "npm run build",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage --reporter=json --outputFile=coverage/report.json",
     "dev": "esbuild src/index.ts --bundle --format=esm --platform=neutral --outfile=dist/index.js --watch",
     "demo": "tsx examples/demo.ts",
     "demo:cl": "tsx examples/demo-cl.ts",
